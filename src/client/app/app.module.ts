@@ -5,7 +5,7 @@ import { RootComponent } from './components/root/root.component';
 import {LoginComponent} from './components/login/login.component';
 import {HomeComponent} from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatCheckboxModule,MatToolbarModule ,MatCardModule,MatIconModule,MatInputModule} from '@angular/material';
+import { MatButtonModule, MatCheckboxModule,MatToolbarModule ,MatCardModule,MatIconModule,MatInputModule,MatStepperModule} from '@angular/material';
 import {AuthentificationService} from './services/authentification.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import {CryptoService} from './services/crypto.service';
@@ -38,12 +38,13 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     MatInputModule,
     HttpClientModule,
+    MatStepperModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
     RouterModule.forRoot(
       appRoutes,
-      { useHash:true } 
+      { useHash:true }
     )
   ],
   providers: [AuthentificationService,CryptoService,{

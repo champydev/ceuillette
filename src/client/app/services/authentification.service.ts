@@ -24,7 +24,7 @@ export class AuthentificationService implements CanActivate {
     const success = await this.refresh();
 
     if (success) {
-     
+
       return true;
 
     }
@@ -35,6 +35,26 @@ export class AuthentificationService implements CanActivate {
 
 
   }
+  async createAccount(email : string,hash : string,nom : string,prenom : string): Promise<boolean>
+  {
+    return new Promise<boolean>((resolve, reject) => {
+      this.http.post('/api/signup', {
+        email: email,
+        hash: hash,
+        nom: nom,
+        prenom: prenom
+      }).subscribe(
+        (data: any) => {
+
+          resolve(true);
+        },
+        error => {
+
+          resolve(false);
+        }
+      );
+    });
+  }
   async logout(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.stopAutoRefresh();
@@ -42,7 +62,7 @@ export class AuthentificationService implements CanActivate {
       this.http.post('/api/logout', {
         token: this.token,
       }).subscribe(
-        (data: any) => {        
+        (data: any) => {
           this.router.navigate(['/login']);
           this.loggedSource.next(false);
           resolve(true);
@@ -52,9 +72,9 @@ export class AuthentificationService implements CanActivate {
           resolve(false);
         }
       );
-  
+
     });
-   
+
   }
   stopAutoRefresh()
   {
@@ -71,7 +91,7 @@ export class AuthentificationService implements CanActivate {
       if (!success) {
         this.stopAutoRefresh();
         this.router.navigate(['/login']);
-      } 
+      }
     }, 5000);
   }
 

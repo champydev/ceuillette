@@ -1,5 +1,6 @@
 import * as restify from 'restify';
 import * as path from 'path';
+import { Config } from './config';
 import { AuthentificationController } from './controllers/authentification.controller';
 export default class Server {
   private _restifyServer: restify.Server;
@@ -32,7 +33,7 @@ export default class Server {
     this._restifyServer.use(restify.plugins.bodyParser());
   }
   start() {
-    const port = 80;
+    const port = Config.api_port;
     this._restifyServer.listen(port, () => {
       console.log(
         '%s running on %s',

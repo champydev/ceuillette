@@ -1,10 +1,19 @@
 import * as pg from 'pg';
+import { Config } from '../config';
 export class DataService {
   public static async connect(): Promise<pg.Client> {
     return new Promise<pg.Client>((resolve, reject) => {
       const databaseURL =
-        process.env.DATABASE_URL ||
-        'postgres://postgres:Emash21@localhost:5432/Ceuillette';
+        'postgres://' +
+        Config.db_login +
+        ':' +
+        Config.db_pass +
+        '@' +
+        Config.db_host +
+        ':' +
+        Config.db_port +
+        '/' +
+        Config.db_name;
       console.log('databaseURL : ' + databaseURL);
       const client = new pg.Client(databaseURL);
       client.connect((errConnection: any) => {
@@ -37,7 +46,7 @@ export class DataService {
     values?: any[]
   ): Promise<pg.QueryResult> {
     const client = await DataService.connect();
-    console.log("Execute "+sql);
+    console.log('Execute ' + sql);
     const result = await DataService.executeQueryInternal(client, sql, values);
     client.end();
 

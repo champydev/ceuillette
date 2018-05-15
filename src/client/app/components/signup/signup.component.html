@@ -19,18 +19,18 @@
           </mat-error>
         </div>
 
-         <!-- Nom -->
-         <mat-form-field>
-                <input formControlName="nom" type="text" matInput placeholder="Nom">
-              </mat-form-field>
-              <div class="error-container">
-                <mat-error *ngIf="!signupForm.controls['nom'].hasError('required') && signupForm.controls['nom'].hasError('minlength')">
-                  Veuillez saisir un nom de 2 caractères minimum
-                </mat-error>
-                <mat-error *ngIf="signupForm.controls['nom'].hasError('required') && !signupForm.controls['nom'].hasError('minlength')">
-                  Veuillez saisir un nom
-                </mat-error>
-              </div>
+        <!-- Nom -->
+        <mat-form-field>
+          <input formControlName="nom" type="text" matInput placeholder="Nom">
+        </mat-form-field>
+        <div class="error-container">
+          <mat-error *ngIf="!signupForm.controls['nom'].hasError('required') && signupForm.controls['nom'].hasError('minlength')">
+            Veuillez saisir un nom de 2 caractères minimum
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls['nom'].hasError('required') && !signupForm.controls['nom'].hasError('minlength')">
+            Veuillez saisir un nom
+          </mat-error>
+        </div>
 
         <!-- Email -->
         <mat-form-field class="form-field">
@@ -58,7 +58,7 @@
           </mat-error>
         </div>
 
-       
+
         <button (click)="onValidateClick()" class="connect-button" mat-raised-button color="primary">Valider</button>
 
 
@@ -66,3 +66,4 @@
     </mat-card-content>
   </mat-card>
 </div>
+
