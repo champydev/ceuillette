@@ -1,6 +1,6 @@
 <div class="container">
   <mat-toolbar color="primary">
-      <mat-icon>face</mat-icon>
+      <mat-icon md-48>account_box</mat-icon>
       <div>&nbsp;&nbsp;Authentification</div>
   </mat-toolbar>
   <mat-card class="login-card">
@@ -17,9 +17,6 @@
                     Veuillez saisir une adresse e-mail
                 </mat-error>
             </div>
-
-
-
             <mat-form-field >
               <input formControlName="password" type="password" matInput placeholder="Mot de passe">
             </mat-form-field>
@@ -31,8 +28,10 @@
                     Veuillez saisir un mot de passe
                 </mat-error>
               </div>
-              <mat-checkbox>Se souvenir de moi</mat-checkbox>
+              <mat-checkbox formControlName="remeberMe">Se souvenir de moi</mat-checkbox>
+              <button (click)="onConnectClick()" class="connect-button" mat-raised-button color="primary">Connexion</button>
 
+             
           </form>
     </mat-card-content>
   </mat-card>

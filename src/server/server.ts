@@ -1,13 +1,13 @@
 import * as restify from 'restify';
 import * as path from 'path';
-//import {AuthenticateController} from './controllers/authenticate.controller';
+import {AuthentificationController} from './controllers/authentification.controller';
 export default class Server
 {
     private _restifyServer : restify.Server;
     constructor()
     {
         this._restifyServer = restify.createServer({
-            name: 'Cesium Démo',
+            name: 'Ceuillette',
             version: '1.0.0'
         });
         this.configurePlugins();
@@ -24,8 +24,8 @@ export default class Server
               default: 'index.html'
             })
           );
-      //  const authenticateController = new  AuthenticateController();
-      //  authenticateController.configureRoutes(this._restifyServer);
+          const authentificationController = new AuthentificationController();
+          authentificationController.configureRoutes(this._restifyServer);   
     }
     private configurePlugins()
     {

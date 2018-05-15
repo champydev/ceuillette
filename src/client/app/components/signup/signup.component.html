@@ -1,0 +1,68 @@
+<div class="container">
+  <mat-toolbar color="primary">
+    <mat-icon md-48>account_box</mat-icon>
+    <div>&nbsp;&nbsp;Créer un compte</div>
+  </mat-toolbar>
+  <mat-card class="signup-card">
+    <mat-card-content>
+      <form [formGroup]="signupForm" class="form">
+        <!-- Prenom -->
+        <mat-form-field>
+          <input formControlName="prenom" type="text" matInput placeholder="Prénom">
+        </mat-form-field>
+        <div class="error-container">
+          <mat-error *ngIf="!signupForm.controls['prenom'].hasError('required') && signupForm.controls['prenom'].hasError('minlength')">
+            Veuillez saisir un prénom de 2 caractères minimum
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls['prenom'].hasError('required') && !signupForm.controls['prenom'].hasError('minlength')">
+            Veuillez saisir un prénom
+          </mat-error>
+        </div>
+
+         <!-- Nom -->
+         <mat-form-field>
+                <input formControlName="nom" type="text" matInput placeholder="Nom">
+              </mat-form-field>
+              <div class="error-container">
+                <mat-error *ngIf="!signupForm.controls['nom'].hasError('required') && signupForm.controls['nom'].hasError('minlength')">
+                  Veuillez saisir un nom de 2 caractères minimum
+                </mat-error>
+                <mat-error *ngIf="signupForm.controls['nom'].hasError('required') && !signupForm.controls['nom'].hasError('minlength')">
+                  Veuillez saisir un nom
+                </mat-error>
+              </div>
+
+        <!-- Email -->
+        <mat-form-field class="form-field">
+          <input formControlName="email" matInput type="email" placeholder="E-mail">
+        </mat-form-field>
+        <div class="error-container">
+          <mat-error *ngIf="signupForm.controls['email'].hasError('email') && !signupForm.controls['email'].hasError('required')">
+            Veuillez saisir une adresse e-mail valide
+          </mat-error>
+          <mat-error *ngIf="!signupForm.controls['email'].hasError('email') && signupForm.controls['email'].hasError('required')">
+            Veuillez saisir une adresse e-mail
+          </mat-error>
+        </div>
+
+        <!-- Mot de passe -->
+        <mat-form-field>
+          <input formControlName="password" type="password" matInput placeholder="Mot de passe">
+        </mat-form-field>
+        <div class="error-container">
+          <mat-error *ngIf="!signupForm.controls['password'].hasError('required') && signupForm.controls['password'].hasError('minlength')">
+            Veuillez saisir un mot de passe de 6 caractères minimum
+          </mat-error>
+          <mat-error *ngIf="signupForm.controls['password'].hasError('required') && !signupForm.controls['password'].hasError('minlength')">
+            Veuillez saisir un mot de passe
+          </mat-error>
+        </div>
+
+       
+        <button (click)="onValidateClick()" class="connect-button" mat-raised-button color="primary">Valider</button>
+
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

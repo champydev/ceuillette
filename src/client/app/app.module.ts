@@ -7,11 +7,18 @@ import {HomeComponent} from './components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatCheckboxModule,MatToolbarModule ,MatCardModule,MatIconModule,MatInputModule} from '@angular/material';
 import {AuthentificationService} from './services/authentification.service';
-import { ReactiveFormsModule } from '@angular/forms';  // <-- #1 import module
+import { ReactiveFormsModule } from '@angular/forms';
+import {CryptoService} from './services/crypto.service';
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {HttpJwtInterceptor} from './services/http.jwt.interceptor';
+import {AccountComponent} from './components/account/account.component';
+import {SignupComponent} from './components/signup/signup.component';
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent,canActivate:[AuthentificationService] },
+  { path: 'account', component: AccountComponent,canActivate:[AuthentificationService] },
   { path: 'login',      component: LoginComponent },
-
+  { path: 'signup',      component: SignupComponent },
   { path: '',
     redirectTo: '/home',
     pathMatch: 'full'
@@ -22,7 +29,7 @@ const appRoutes: Routes = [
 
 
 @NgModule({
-  declarations: [RootComponent,LoginComponent,HomeComponent],
+  declarations: [RootComponent,LoginComponent,HomeComponent,AccountComponent,SignupComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -30,15 +37,20 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     ReactiveFormsModule,
     MatInputModule,
+    HttpClientModule,
     MatToolbarModule,
     MatCardModule,
     MatIconModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true,useHash:true } // <-- debugging purposes only
+      { useHash:true } 
     )
   ],
-  providers: [AuthentificationService],
+  providers: [AuthentificationService,CryptoService,{
+    provide: HTTP_INTERCEPTORS,
+    useClass: HttpJwtInterceptor,
+    multi: true
+  }],
   bootstrap: [RootComponent]
 })
 export class AppModule {}

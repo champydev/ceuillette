@@ -1,7 +1,16 @@
-:host{
-  flex:1;
+:host {
+  flex: 1;
   display: flex;
-  margin:0;
+  margin: 0;
   padding: 0;
   flex-direction: column;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.header-button {
+  margin: 10px;
+  width: 160px;
 }
