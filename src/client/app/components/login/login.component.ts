@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { FormControl, FormGroup,FormBuilder, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   title = 'login';
+  loginForm :FormGroup;
+  constructor(private fb: FormBuilder) { // <--- inject FormBuilder
+    this.createForm();
+  }
+  createForm() {
+    this.loginForm = this.fb.group({
+      email:  ['', [Validators.required,Validators.email ]],
+      password:  ['', [Validators.required,Validators.minLength(6)]],
+    });
+  }
 }
