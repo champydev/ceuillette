@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <div class="spacer"></div>
-  <button class="header-button" (click)="onAccountClick()" *ngIf="isLogged && router.url != '/account'" mat-raised-button>
+  <button class="header-button" (click)="onAccountClick()" *ngIf="isLogged && router.url != '/account/detail'" mat-raised-button>
     <mat-icon aria-label="Example icon-button with a heart icon">account_box</mat-icon>
     &nbsp;Mon compte</button>
   <button class="header-button" (click)="onHomeClick()" *ngIf="isLogged && router.url != '/home'" mat-raised-button>
@@ -9,8 +9,8 @@
   <button class="header-button" (click)="onDisconnectClick()" *ngIf="isLogged" mat-raised-button>
     <mat-icon aria-label="Example icon-button with a heart icon">power_settings_new</mat-icon>
     &nbsp;Déconnexion</button>
-    <button  *ngIf="!isLogged && router.url == '/login'" (click)="onSignupClick()" class="header-button" mat-raised-button >Créer un compte</button>
-    <button class="header-button" (click)="onConnectClick()" *ngIf="router.url == '/signup'" mat-raised-button>
+    <button  *ngIf="!isLogged && router.url == '/account/signin'" (click)="onSignupClick()" class="header-button" mat-raised-button >Créer un compte</button>
+    <button class="header-button" (click)="onConnectClick()" *ngIf="router.url == '/account/signup'" mat-raised-button>
         <mat-icon aria-label="Example icon-button with a heart icon">account_box</mat-icon>
         &nbsp;Connexion</button>
   </mat-toolbar>

@@ -13,8 +13,7 @@ export class HttpJwtInterceptor implements  HttpInterceptor{
     
     }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log("Intercept with token "+this.authentificationService.token);
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {       
         if (this.authentificationService.token!= null){
           request = request.clone({
             setHeaders: {

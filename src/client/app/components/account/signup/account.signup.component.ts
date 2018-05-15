@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {AuthentificationService} from '../../services/authentification.service';
-import {CryptoService} from '../../services/crypto.service';
+import {AuthentificationService} from '../../../services/authentification.service';
+import {CryptoService} from '../../../services/crypto.service';
 import { CanActivate,Router }    from '@angular/router';
 @Component({
   selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  templateUrl: './account.signup.component.html',
+  styleUrls: ['./account.signup.component.css']
 })
-export class SignupComponent {
+export class AccountSignupComponent {
   title = 'signup';
   signupForm : FormGroup;
   constructor(private router: Router,private fb: FormBuilder,private cryptoService : CryptoService,private authentificationService : AuthentificationService) {

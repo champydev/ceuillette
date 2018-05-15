@@ -25,6 +25,12 @@
 {
   margin-top: 20px;
 }
+.login-error
+{
+  margin-top: 20px;
+  font-size: 16px;
+  height: 24px;;
+}
 .form
 {
   flex:1;

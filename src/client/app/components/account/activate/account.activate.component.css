@@ -1,0 +1,28 @@
+:host{
+  flex:1;
+  display: flex;
+  margin:0;
+  padding: 0;
+}
+.container
+{
+
+  margin: auto;
+  margin-top: 100px;
+  width:400px;  
+  display: flex;
+  flex-direction: column;
+  
+}
+.login-card
+{
+  flex:1;
+  display: flex;  
+
+}
+.progress-container
+{
+   margin:auto;
+   width:100px;
+   height:100px;
+}

@@ -7,6 +7,8 @@ export class JwtService {
   private static rsaPrivateKey = '';
   private static rsaPublicKey = '';
   public static async validateToken(token: string): Promise<Object> {
+    await JwtService.generateKeyPairIfNotExist();
+    await JwtService.loadKeyPair();
     const key = await JwtService.rsaPublicKey;
     return new Promise<Object | Error>((resolve, reject) => {
       jwt.verify(token, key, { algorithms: ['RS256'] }, function(err, decoded) {
@@ -19,7 +21,7 @@ export class JwtService {
     });
   }
 
-  public static async generateToken(userId: string): Promise<string> {
+  public static async generateToken(userId: string,expiresIn : string): Promise<string> {
     await JwtService.generateKeyPairIfNotExist();
     await JwtService.loadKeyPair();
     const payload = {
@@ -28,7 +30,7 @@ export class JwtService {
     };
     const token = await jwt.sign(payload, JwtService.rsaPrivateKey, {
       algorithm: 'RS256',
-      expiresIn: '1h'
+      expiresIn: expiresIn
     });
     return token;
   }

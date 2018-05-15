@@ -17,15 +17,15 @@ export class RootComponent {
   }
   async onConnectClick()
   {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/account/signin']);
   }
   async onSignupClick()
   {
-    this.router.navigate(['/signup']);
+    this.router.navigate(['/account/signup']);
   }
   async onAccountClick()
   {
-    this.router.navigate(['/account']);
+    this.router.navigate(['/account/detail']);
   }
   async onDisconnectClick()
   {

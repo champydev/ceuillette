@@ -29,16 +29,31 @@ export class AuthentificationService implements CanActivate {
 
     }
     else {
-      this.router.navigate(['/login']);
+      this.router.navigate(['account/signin']);
       return false;
     }
 
 
   }
+  async activateAccount(token : string)
+  {
+    return new Promise<void>((resolve, reject) => {
+      this.http.post('/api/account/activate', {
+        token: token
+      }).subscribe(
+        (data: any) => {
+          resolve();
+        },
+        error => {
+          reject(error);
+        }
+      );
+    });
+  }
   async createAccount(email : string,hash : string,nom : string,prenom : string): Promise<boolean>
   {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.post('/api/signup', {
+      this.http.post('/api/account/signup', {
         email: email,
         hash: hash,
         nom: nom,
@@ -59,11 +74,11 @@ export class AuthentificationService implements CanActivate {
     return new Promise<boolean>((resolve, reject) => {
       this.stopAutoRefresh();
       this.token = null;
-      this.http.post('/api/logout', {
+      this.http.post('/api/account/signout', {
         token: this.token,
       }).subscribe(
         (data: any) => {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/account/signin']);
           this.loggedSource.next(false);
           resolve(true);
         },
@@ -90,14 +105,14 @@ export class AuthentificationService implements CanActivate {
       const success = await this.refresh();
       if (!success) {
         this.stopAutoRefresh();
-        this.router.navigate(['/login']);
+        this.router.navigate(['/account/signin']);
       }
     }, 5000);
   }
 
   async refresh(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.http.post('/api/refresh', {
+      this.http.post('/api/account/refresh', {
         token: this.token,
       }).subscribe(
         (data: any) => {
@@ -112,9 +127,9 @@ export class AuthentificationService implements CanActivate {
 
     });
   }
-  async login(email: string, hash: string): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      this.http.post('/api/login', {
+  async login(email: string, hash: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.http.post('/api/account/signin', {
         email: email,
         hash: hash
       }).subscribe(
@@ -123,7 +138,7 @@ export class AuthentificationService implements CanActivate {
           console.log("token " + this.token);
           this.startAutoRefresh();
           this.loggedSource.next(true);
-          resolve(true);
+          resolve();
         },
         error => {
           this.loggedSource.next(false);
