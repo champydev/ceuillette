@@ -15,7 +15,13 @@ import { Observable } from 'rxjs';
 export class AuthentificationService implements CanActivate {
   private loggedSource = new Subject<boolean>();
   loggedChange$ = this.loggedSource.asObservable();
+
+  private logginSource = new Subject<boolean>();
+  logginChange$ = this.logginSource.asObservable();
+
   token: string;
+  nom : string;
+  prenom : string;
   private refreshTokenTaskId: any;
   constructor(private router: Router, private http: HttpClient) {
 
@@ -37,12 +43,12 @@ export class AuthentificationService implements CanActivate {
   }
   async activateAccount(token : string)
   {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       this.http.post('/api/account/activate', {
         token: token
       }).subscribe(
         (data: any) => {
-          resolve();
+          resolve(data);
         },
         error => {
           reject(error);
@@ -129,23 +135,31 @@ export class AuthentificationService implements CanActivate {
   }
   async login(email: string, hash: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
+      this.logginSource.next(true);
       this.http.post('/api/account/signin', {
         email: email,
         hash: hash
       }).subscribe(
         (data: any) => {
-          this.token = data.token;
-          console.log("token " + this.token);
-          this.startAutoRefresh();
-          this.loggedSource.next(true);
+          this.setLogged(data.token,data.nom,data.prenom);
           resolve();
         },
         error => {
+          this.logginSource.next(false);
           this.loggedSource.next(false);
           reject(error);
         }
       );
 
     });
+  }
+  setLogged(token : string,nom : string, prenom : string)
+  {
+    this.token = token;
+    this.nom = nom;
+    this.prenom =prenom;
+    this.startAutoRefresh();
+    this.logginSource.next(false);
+    this.loggedSource.next(true);
   }
 }

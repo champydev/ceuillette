@@ -1,10 +1,22 @@
 <div class="container">
-    <mat-toolbar color="primary">
-        <mat-icon md-48>account_box</mat-icon>
-        <div>&nbsp;&nbsp;Activation de votre compte</div>
-    </mat-toolbar>
-    <mat-card class="login-card">
-        <div class="progress-container"> <mat-spinner *ngIf="showProgress"></mat-spinner></div>
-    </mat-card>
-  </div>
-  
+  <mat-toolbar color="primary">
+    <mat-icon md-48>account_box</mat-icon>
+    <div>&nbsp;&nbsp;Activation de votre compte</div>
+  </mat-toolbar>
+  <mat-card class="login-card">
+    <div *ngIf="showProgress" class="progress-container">
+      <mat-spinner></mat-spinner>
+
+    </div>
+    <div class="error-container mat-error" *ngIf="errorMessage != null">
+      <mat-icon md-48>error</mat-icon>
+      <div>&nbsp;{{errorMessage}}</div>
+    </div>
+
+    <div class="ok-container" *ngIf="okMessage != null">
+        <mat-icon md-48>done</mat-icon>
+        <div>&nbsp;{{okMessage}}</div>
+      </div>
+
+  </mat-card>
+</div>

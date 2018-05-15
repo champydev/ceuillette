@@ -4,9 +4,10 @@ import {JwtService} from './jwt.service';
 export class MailService {
 
   public static async sendActivationMail(token: string,email:string,nom : string,prenom:string) {
-    
+
     return new Promise<void>((resolve, reject) => {
       console.log('Config ' + Config.smtp_login + " " + Config.smtp_password);
+      process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -23,7 +24,7 @@ export class MailService {
         Config.site_url+'/#/account/activate?token='+token+'\r\n\r\n'+
         'Bonne journée'
       };
-  
+
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
           console.log(error);

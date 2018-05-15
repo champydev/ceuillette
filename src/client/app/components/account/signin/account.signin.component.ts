@@ -15,8 +15,8 @@ export class AccountSinginComponent implements OnInit,AfterViewInit {
   title = 'login';
   loginForm: FormGroup;
   waiting = false;
-  
-  
+
+
 
   constructor(public snackBar: MatSnackBar, private router: Router, private fb: FormBuilder, private cryptoService: CryptoService, private authentificationService: AuthentificationService) {
     this.createForm();
@@ -31,11 +31,11 @@ export class AccountSinginComponent implements OnInit,AfterViewInit {
   public ngAfterViewInit()
   {
     setTimeout(() =>{ this.validateAllFormFields(this.loginForm);},300);
-   
+
   }
   public ngOnInit()
   {
-      
+
   }
 
   private validateAllFormFields(formGroup: FormGroup) {
@@ -74,14 +74,10 @@ export class AccountSinginComponent implements OnInit,AfterViewInit {
         data:{
           error:this.formatError(e)
         },
-        duration:3000
+        duration:1500
       });
     }
     },500);
-    
-
-
-
   }
   public formatError(error: any): string {
     if (error instanceof HttpErrorResponse) {

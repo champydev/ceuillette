@@ -4,20 +4,35 @@
   margin:0;
   padding: 0;
 }
+.error-container
+{
+
+  width:360px;
+  display: flex;
+  align-items: center;
+
+}
+.ok-container
+{
+  width:300px;
+  display: flex;
+  align-items: center;
+  color: green;
+}
 .container
 {
 
   margin: auto;
   margin-top: 100px;
-  width:400px;  
+  width:400px;
   display: flex;
   flex-direction: column;
-  
+
 }
 .login-card
 {
   flex:1;
-  display: flex;  
+  display: flex;
 
 }
 .progress-container
